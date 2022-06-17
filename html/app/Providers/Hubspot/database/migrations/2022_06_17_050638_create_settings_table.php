@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('api_key', 255);
+            $table->text('api_key');
             $table->string('sender_id', 9);
             $table->boolean('show_reports');
             $table->boolean('show_people');

@@ -14,4 +14,9 @@ Route::group(['prefix' => 'hubspot', 'middleware' => 'api'], function () {
         Route::delete('/destroy/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'destroy'])->name('hubspot.settings.destroy');
     });
 
+    Route::prefix('/smsto')->group(function () {
+        Route::get('/params', [\Smsto\Hubspot\Http\Controllers\SmstoController::class, 'params'])->name('hubspot.smsto.params');
+        Route::any('/call', [\Smsto\Hubspot\Http\Controllers\SmstoController::class, 'call'])->name('hubspot.smsto.call');
+    });
+
 });
