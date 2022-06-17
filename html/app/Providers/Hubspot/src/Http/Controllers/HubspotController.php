@@ -20,11 +20,13 @@ class HubspotController extends Controller
     {
         $response = Http::get('https://integration.sms.to/component_bulk_sms/manifest.json');
         $manifest = json_decode($response, true);
-        $url = route('home'); // to get Base Url
-        $VITE_ROUTE_PARAMS =  $url . "rest/V1/smsto-sms/params";
-        $VITE_ROUTE_SMSTO =  $url . "rest/V1/smsto-sms/callsmsto";
-        dd($VITE_ROUTE_PARAMS);
-        return view('hubspot::hubspot');
+        $data = [
+            'VITE_ROUTE_PARAMS' =>  route('hubspot.smsto.params'),
+            'VITE_ROUTE_SMSTO' =>  route('hubspot.smsto.call'),
+            'assets_link' => $manifest['src/main.ts']['css'][0],
+            'js_link' => $manifest['src/main.ts']['file']
+        ];
+        return view('hubspot::hubspot', $data);
     }
 
     /**

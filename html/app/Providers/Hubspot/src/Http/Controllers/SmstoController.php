@@ -18,7 +18,18 @@ class SmstoController extends Controller
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
     public function params(Request $request) {
-        return response(Settings::select('sender_id', 'show_reports', 'show_people')->first());
+        $settings = Settings::select('show_reports', 'show_people')->first();
+        $response = [
+            "success" => true,
+            "message" => null,
+            "messages" => null,
+            "data" => [
+                "show_reports" => $settings->show_reports,
+                "show_people" => $settings->show_people
+            ]
+        ];
+
+        return response($response);
     }
 
     /**
