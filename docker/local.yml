@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+
+    hubspot:
+        container_name: ${COMPOSE_PROJECT_NAME}_${COMPOSE_APP_NAME}
+        image: phalouvas/laravel:php8.1-nginx
+        hostname: ${COMPOSE_APP_NAME}
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.${COMPOSE_PROJECT_NAME}_${COMPOSE_APP_NAME}.rule=Host(`${COMPOSE_APP_NAME}.${COMPOSE_BASE_DOMAIN}`)"
+            - "traefik.http.routers.${COMPOSE_PROJECT_NAME}_${COMPOSE_APP_NAME}.tls=true"
+            - "traefik.http.routers.${COMPOSE_PROJECT_NAME}_${COMPOSE_APP_NAME}.entrypoints=websecure"
+        environment:
+            - PHCOMM_ENV=false
+            - PHCOMM_BUILD_ASSETS=false
+            - PHCOMM_SUPERVISOR=false
+        volumes:
+            - ../html/:/var/www/html//:rw
+            - ../docker/:/home/docker//:rw
+
+networks:
+    default:
+        name: ${COMPOSE_PROJECT_NAME}-local-net
+        driver: bridge
