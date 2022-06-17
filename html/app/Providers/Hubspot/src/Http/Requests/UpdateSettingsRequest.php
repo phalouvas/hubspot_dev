@@ -2,7 +2,6 @@
 
 namespace Smsto\Hubspot\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSettingsRequest extends FormRequest
 {
@@ -13,7 +12,7 @@ class UpdateSettingsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +23,10 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'api_key' => ['string', 'max:255'],
+            'sender_id' => ['string', 'max:9'],
+            'show_reports' => ['boolean'],
+            'show_people' => ['boolean'],
         ];
     }
 }

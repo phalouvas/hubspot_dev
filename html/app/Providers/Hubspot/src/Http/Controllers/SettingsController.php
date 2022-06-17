@@ -2,9 +2,9 @@
 
 namespace Smsto\Hubspot\Http\Controllers;
 
-use App\Http\Requests\StoreSettingsRequest;
-use App\Http\Requests\UpdateSettingsRequest;
-use App\Models\Settings;
+use Smsto\Hubspot\Http\Requests\StoreSettingsRequest;
+use Smsto\Hubspot\Http\Requests\UpdateSettingsRequest;
+use Smsto\Hubspot\Models\Settings;
 
 class SettingsController extends Controller
 {
@@ -15,7 +15,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        //
+        return response(Settings::all());
     }
 
     /**
@@ -36,7 +36,8 @@ class SettingsController extends Controller
      */
     public function store(StoreSettingsRequest $request)
     {
-        //
+        $validated = $request->validate($request->rules());
+        return response(Settings::create($validated));
     }
 
     /**
@@ -47,7 +48,7 @@ class SettingsController extends Controller
      */
     public function show(Settings $settings)
     {
-        //
+        return response($settings);
     }
 
     /**
@@ -70,7 +71,8 @@ class SettingsController extends Controller
      */
     public function update(UpdateSettingsRequest $request, Settings $settings)
     {
-        //
+        $validated = $request->validate($request->rules());
+        return response($settings->update($validated));
     }
 
     /**

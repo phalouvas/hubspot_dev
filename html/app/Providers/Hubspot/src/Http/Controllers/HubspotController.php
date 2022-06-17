@@ -26,4 +26,16 @@ class HubspotController extends Controller
         dd($VITE_ROUTE_PARAMS);
         return view('hubspot::hubspot');
     }
+
+    /**
+     * Render json error for validation
+     *
+     * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function error(Request $request) {
+        return response(['message' => 'Input validation failed'], 422);
+    }
 }
