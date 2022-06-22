@@ -18,4 +18,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/error', [\Smsto\Hubspot\Http\Controllers\HubspotController::class, 'error'])->name('hubspot.error');
