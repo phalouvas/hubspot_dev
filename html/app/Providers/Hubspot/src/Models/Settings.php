@@ -2,8 +2,10 @@
 
 namespace Smsto\Hubspot\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Smsto\Hubspot\Casts\AccessToken;
 
 class Settings extends Model
 {
@@ -17,6 +19,11 @@ class Settings extends Model
      * @var array<string>
      */
     protected $fillable = [
+        'code',
+        'access_token',
+        'refresh_token',
+        'expires_in',
+        'expires_at',
         'api_key',
         'sender_id',
         'show_reports',
@@ -31,6 +38,7 @@ class Settings extends Model
      * @var array
      */
     protected $casts = [
+        'access_token' => AccessToken::class,
         'show_reports' => 'boolean',
         'show_people' => 'boolean',
     ];

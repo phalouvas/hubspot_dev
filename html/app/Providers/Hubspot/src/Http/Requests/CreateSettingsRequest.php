@@ -2,7 +2,7 @@
 
 namespace Smsto\Hubspot\Http\Requests;
 
-class StoreSettingsRequest extends FormRequest
+class CreateSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,7 @@ class StoreSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', 'string'],
-            'api_key' => ['required', 'string'],
-            'sender_id' => ['required', 'string', 'max:9'],
-            'show_reports' => ['string', 'nullable'],
-            'show_people' => ['string', 'nullable'],
+            'code' => ['required', 'string', 'max:36'],
         ];
     }
 }

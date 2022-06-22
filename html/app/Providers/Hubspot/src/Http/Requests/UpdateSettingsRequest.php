@@ -23,10 +23,11 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'api_key' => ['string'],
-            'sender_id' => ['string', 'max:9'],
-            'show_reports' => ['boolean'],
-            'show_people' => ['boolean'],
+            'code' => ['required', 'string'],
+            'api_key' => ['required', 'string'],
+            'sender_id' => ['required', 'string', 'max:9'],
+            'show_reports' => ['string', 'nullable'],
+            'show_people' => ['string', 'nullable'],
         ];
     }
 }

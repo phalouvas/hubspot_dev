@@ -5,6 +5,7 @@ namespace Smsto\Hubspot\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Smsto\Hubspot\Http\Requests\SmstoRequest;
+use Smsto\Hubspot\Http\Requests\WorkflowRequest;
 use Smsto\Hubspot\Models\Settings;
 
 class SmstoController extends Controller
@@ -48,5 +49,36 @@ class SmstoController extends Controller
         $payload = isset($validated['payload']) ? $validated['payload'] : null;
         $response = Http::withToken($settings->api_key)->asJson()->acceptJson()->$method($url, $payload);
         return response(json_decode($response, true));
+    }
+
+    /**
+     * Call smsto
+     *
+     * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     */
+    public function send(WorkflowRequest $request) {
+        $validated = $request->validated();
+        $api_key = $validated['inputFields']['api_key'];
+        unset($validated['inputFields']['api_key']);
+        $response = Http::withToken($api_key)->asJson()->acceptJson()->post('https://api.sms.to/sms/send', $validated['inputFields']);
+        $response = json_decode($response, true);
+        if ($response['success']) {
+            return response([
+                "outputFields" => [
+                    'hs_execution_state' => "SUCCESS",
+                    "myOutput" => $response['message']
+                ]
+            ]);
+        } else {
+            return response([
+                "outputFields" => [
+                    'hs_execution_state' => "FAIL_CONTINUE",
+                    "myOutput" => "Something went wrong"
+                ]
+            ]);
+        }
     }
 }

@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->uuid('code')->index();
+            $table->text('access_token')->nullable();
+            $table->uuid('refresh_token')->nullable();
+            $table->integer('expires_in')->nullable();
+            $table->integer('expires_at')->nullable();
             $table->text('api_key');
             $table->string('sender_id', 9);
-            $table->boolean('show_reports');
-            $table->boolean('show_people');
+            $table->boolean('show_reports')->default(true);
+            $table->boolean('show_people')->default(true);
             $table->timestamps();
         });
     }
