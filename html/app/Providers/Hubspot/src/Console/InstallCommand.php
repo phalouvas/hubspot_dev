@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Smsto\Hubspot\Models\Jsons;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -38,8 +39,26 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->importJsons();
         $this->line('');
         $this->info('Hubspot installed successfully.');
+    }
+
+    /**
+     * Import jons payloads to DB
+     *
+     * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     *
+     * @return void
+     */
+    protected function importJsons() {
+        DB::table('jsons')->truncate();
+        foreach (config('hubspot.jsons') as $name => $payload ) {
+            Jsons::create([
+                'name' => $name,
+                'payload' => $payload
+            ]);
+        }
     }
 
 }
