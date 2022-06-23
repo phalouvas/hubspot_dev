@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'web', 'middleware' => 'auth.basic'], function () {
+Route::group(['prefix' => 'hubspot/admin', 'middleware' => 'web', 'middleware' => 'auth.basic'], function () {
 
     Route::get('/', function () {
         return view('hubspot::home');
-    })->name('login');
+    })->name('hubspot.admin.home');
 
     Route::prefix('/actions')->group(function () {
         Route::get('/', [\Smsto\Hubspot\Http\Controllers\ActionsController::class, 'index'])->name('hubspot.admin.actions.index');
