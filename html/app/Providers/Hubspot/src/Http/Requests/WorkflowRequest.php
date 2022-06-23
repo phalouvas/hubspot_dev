@@ -2,7 +2,7 @@
 
 namespace Smsto\Hubspot\Http\Requests;
 
-class ActionRequest extends FormRequest
+class WorkflowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

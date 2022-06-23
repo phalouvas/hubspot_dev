@@ -5,7 +5,7 @@ namespace Smsto\Hubspot\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Smsto\Hubspot\Http\Requests\SmstoRequest;
-use Smsto\Hubspot\Http\Requests\ActionRequest;
+use Smsto\Hubspot\Http\Requests\WorkflowRequest;
 use Smsto\Hubspot\Models\Settings;
 
 class SmstoController extends Controller
@@ -59,7 +59,7 @@ class SmstoController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
-    public function send(ActionRequest $request) {
+    public function send(WorkflowRequest $request) {
         $validated = $request->validated();
         $api_key = $validated['inputFields']['api_key'];
         unset($validated['inputFields']['api_key']);
