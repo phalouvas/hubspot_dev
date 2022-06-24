@@ -19,11 +19,22 @@ class Settings extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'code',
-        'access_token',
         'refresh_token',
         'expires_in',
+        'access_token',
         'expires_at',
+        'token_type',
+
+        'user',
+        'hub_domain',
+        'scopes',
+        'scope_to_scope_group_pks',
+        'trial_scopes',
+        'trial_scope_to_scope_group_pks',
+        'hub_id',
+        'app_id',
+        'user_id',
+
         'api_key',
         'sender_id',
         'show_reports',
@@ -41,6 +52,10 @@ class Settings extends Model
         'access_token' => AccessToken::class,
         'show_reports' => 'boolean',
         'show_people' => 'boolean',
+        'scopes' => 'array',
+        'scope_to_scope_group_pks' => 'array',
+        'trial_scopes' => 'array',
+        'trial_scope_to_scope_group_pks' => 'array',
     ];
 
 }

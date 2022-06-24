@@ -59,6 +59,19 @@ class SettingsController extends Controller
         $validated['refresh_token'] = $tokens->getRefreshToken();
         $validated['expires_in'] = $tokens->getExpiresIn();
         $validated['expires_at'] = time() + $tokens['expires_in'] * 0.95;
+        $validated['token_type'] = $tokens->getTokenType();
+
+        $client = Factory::createWithAccessToken($validated['access_token']);
+        $api_response = $client->auth()->oAuth()->accessTokensApi()->getAccessToken($validated['access_token']);
+        $validated['user'] = $api_response->getUser();
+        $validated['hub_domain'] = $api_response->getHubDomain();
+        $validated['scopes'] = $api_response->getScopes();
+        $validated['scope_to_scope_group_pks'] = $api_response->getScopeToScopeGroupPks();
+        $validated['trial_scopes'] = $api_response->getTrialScopes();
+        $validated['trial_scope_to_scope_group_pks'] = $api_response->getTrialScopeToScopeGroupPks();
+        $validated['hub_id'] = $api_response->getHubId();
+        $validated['app_id'] = $api_response->getAppId();
+        $validated['user_id'] = $api_response->getUserId();
 
         $settings = Settings::create($validated);
         return redirect(route('hubspot.settings.show', ['settings' => $settings->id]));
