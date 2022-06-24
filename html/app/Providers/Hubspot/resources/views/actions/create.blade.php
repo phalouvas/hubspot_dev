@@ -8,8 +8,8 @@
             @csrf
             <div class="mb-3">
                 <select class="form-select" aria-describedby="jsonHelp" id="json_id" name="json_id" required>
-                    @foreach ($jsons as $json)
-                    <option value="{{$json->id}}">{{$json->name}}</option>
+                    @foreach ($jsons as $key => $json)
+                    <option value="{{$key}}">{{$json['name']}}</option>
                     @endforeach
                 </select>
                 <div id="jsonHelp" class="form-text">Make sure to select an action.</div>

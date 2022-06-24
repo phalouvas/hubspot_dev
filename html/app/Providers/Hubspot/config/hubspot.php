@@ -6,8 +6,10 @@ return [
     'client_id' => env('CLIENT_ID', '6f6b84ab-2ed3-4520-89eb-2344996eb592'),
     'client_secret' => env('CLIENT_SECRET', '3add7a5b-558b-48ac-8a37-db954d8dbf6c'),
     'jsons' => [
-        'Send Single SMS' =>
-        '
+        0 => [
+            'name' => 'Send SMS',
+            'payload' =>
+            '
             {
                 "actionUrl": "' . env('APP_URL') . '/hubspot/smsto/send",
                 "published": false,
@@ -58,40 +60,7 @@ return [
                     },
                     {
                         "typeDefinition": {
-                            "name": "bypass_optout",
-                            "type": "bool",
-                            "fieldType": "booleancheckbox"
-                        },
-                        "supportedValueTypes": [
-                            "STATIC_VALUE"
-                        ],
-                        "isRequired": false
-                    },
-                    {
-                        "typeDefinition": {
                             "name": "callback_url",
-                            "type": "string",
-                            "fieldType": "text"
-                        },
-                        "supportedValueTypes": [
-                            "STATIC_VALUE"
-                        ],
-                        "isRequired": false
-                    },
-                    {
-                        "typeDefinition": {
-                            "name": "scheduled_for",
-                            "type": "datetime",
-                            "fieldType": "date"
-                        },
-                        "supportedValueTypes": [
-                            "STATIC_VALUE"
-                        ],
-                        "isRequired": false
-                    },
-                    {
-                        "typeDefinition": {
-                            "name": "timezone",
                             "type": "string",
                             "fieldType": "text"
                         },
@@ -134,5 +103,6 @@ return [
                 ]
             }
             '
+        ],
     ],
 ];

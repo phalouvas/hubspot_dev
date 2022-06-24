@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('expires_in')->nullable();
             $table->integer('expires_at')->nullable();
             $table->text('api_key');
-            $table->string('sender_id', 9);
+            $table->string('sender_id', 9)->nullable();
             $table->boolean('show_reports')->default(true);
             $table->boolean('show_people')->default(true);
             $table->timestamps();

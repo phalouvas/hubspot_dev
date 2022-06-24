@@ -123,7 +123,12 @@ class ActionsController extends Controller
      */
     public function create()
     {
-        return view("hubspot::actions.create", ['jsons' => Jsons::all('id', 'name')]);
+        $jsons = config('hubspot.jsons');
+        foreach ($jsons as $key => $value) {
+            unset($jsons[$key]['payload']);
+        }
+
+        return view("hubspot::actions.create", ['jsons' => $jsons]);
     }
 
     /**
@@ -134,7 +139,8 @@ class ActionsController extends Controller
      */
     public function store(Request $request)
     {
-        $json = Jsons::find($request->json_id);
+        $jsons = config('hubspot.jsons');
+        $json = $jsons[$request->json_id];
 
         $endpoint = "https://api.hubapi.com/automation/v4/actions/" . config('hubspot.app_id') .  "?hapikey=" . config('hubspot.api_key');
         $ch = curl_init();
@@ -149,7 +155,7 @@ class ActionsController extends Controller
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json->payload);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json['payload']);
 
         $response    = curl_exec($ch);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);

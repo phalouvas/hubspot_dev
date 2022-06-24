@@ -24,7 +24,7 @@ class StoreSettingsRequest extends FormRequest
         return [
             'code' => ['required', 'string'],
             'api_key' => ['required', 'string'],
-            'sender_id' => ['required', 'string', 'max:9'],
+            'sender_id' => ['string', 'max:9', 'nullable'],
             'show_reports' => ['string', 'nullable'],
             'show_people' => ['string', 'nullable'],
         ];
