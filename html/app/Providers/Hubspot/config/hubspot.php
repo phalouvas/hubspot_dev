@@ -7,12 +7,12 @@ return [
     'client_secret' => env('CLIENT_SECRET', '3add7a5b-558b-48ac-8a37-db954d8dbf6c'),
     'jsons' => [
         0 => [
-            'name' => 'Send SMS',
+            'actionName' => 'Send SMS',
             'payload' =>
             '
             {
                 "actionUrl": "' . env('APP_URL') . '/hubspot/smsto/send",
-                "published": false,
+                "published": true,
                 "inputFields": [
                     {
                         "typeDefinition": {

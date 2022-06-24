@@ -9,7 +9,7 @@
             <div class="mb-3">
                 <select class="form-select" aria-describedby="jsonHelp" id="json_id" name="json_id" required>
                     @foreach ($jsons as $key => $json)
-                    <option value="{{$key}}">{{$json['name']}}</option>
+                    <option value="{{$key}}">{{$json['actionName']}}</option>
                     @endforeach
                 </select>
                 <div id="jsonHelp" class="form-text">Make sure to select an action.</div>
