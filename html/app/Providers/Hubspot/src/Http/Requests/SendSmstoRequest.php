@@ -2,7 +2,7 @@
 
 namespace Smsto\Hubspot\Http\Requests;
 
-class WorkflowRequest extends FormRequest
+class SendSmstoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class WorkflowRequest extends FormRequest
     public function rules()
     {
         return [
-            'inputFields.api_key' => ['required', 'string'],
             'inputFields.to' => ['required', 'string'],
             'inputFields.message' => ['required', 'string'],
             'inputFields.sender_id' => ['nullable', 'string'],
@@ -30,6 +29,9 @@ class WorkflowRequest extends FormRequest
             'inputFields.callback_url' => ['nullable', 'string'],
             'inputFields.scheduled_for' => ['nullable', 'string'],
             'inputFields.timezone' => ['nullable', 'string'],
+
+            'origin.portalId' => ['required', 'integer'],
+            'object.objectId' => ['required', 'integer'],
         ];
     }
 }

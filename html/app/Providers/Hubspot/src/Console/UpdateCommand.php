@@ -4,10 +4,6 @@ namespace Smsto\Hubspot\Console;
 
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
-use Symfony\Component\Process\PhpExecutableFinder;
-use Symfony\Component\Process\Process;
 
 class UpdateCommand extends Command
 {
