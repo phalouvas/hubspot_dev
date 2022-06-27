@@ -1,4 +1,4 @@
-<x-layout>
+<x-hubspot>
 
     <x-slot:title>
         Create Custom Action
@@ -18,4 +18,4 @@
             <a href="{{route('hubspot.admin.actions.index')}}" class="btn btn-secondary">Close</a>
         </form>
 
-</x-layout>
+</x-hubspot>

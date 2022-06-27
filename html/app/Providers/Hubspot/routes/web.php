@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('hubspot::welcome');
+})->name('hubspot.home');
+
 Route::get('/error', [\Smsto\Hubspot\Http\Controllers\HubspotController::class, 'error'])->name('hubspot.error');
 
 Route::group(['prefix' => 'hubspot', 'middleware' => 'web'], function () {

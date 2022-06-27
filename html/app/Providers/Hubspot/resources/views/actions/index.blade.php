@@ -1,4 +1,4 @@
-<x-layout>
+<x-hubspot>
 
     <x-slot:title>
         Actions
@@ -43,4 +43,4 @@
             </table>
         </div>
 
-</x-layout>
+</x-hubspot>

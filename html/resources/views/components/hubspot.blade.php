@@ -68,7 +68,8 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto HubSpot
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto
+            HubSpot
             Integration</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -77,13 +78,19 @@
         </button>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Actions</a>
+                @auth
+                <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Home</a>
+                @endauth
+                @guest
+                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Admin</a>
+                @endguest
             </div>
         </div>
     </header>
 
     <div class="container-fluid">
         <div class="row">
+            @auth
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
@@ -95,6 +102,7 @@
                     </ul>
                 </div>
             </nav>
+            @endauth
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h2>{{ $title ?? 'SMSto HubSpot Integration' }}</h2>
@@ -102,6 +110,14 @@
             </main>
         </div>
     </div>
+
+    <footer class="navbar navbar-light sticky-bottom bg-light flex-md-nowrap p-6 shadow">
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="https://sms.to">SMSto - All rights reserved</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 

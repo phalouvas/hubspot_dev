@@ -1,4 +1,4 @@
-<x-layout>
+<x-hubspot>
 
     <x-slot:title>
         Action - {{$labels['en']['actionName']}}
@@ -47,4 +47,4 @@
             </div>
         </div>
 
-</x-layout>
+</x-hubspot>
