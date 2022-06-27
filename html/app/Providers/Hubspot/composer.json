@@ -19,9 +19,9 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "@php artisan migrate",
             "@php artisan hubspot:install",
-            "@php artisan hubspot:update",
-            "@php artisan migrate"
+            "@php artisan hubspot:update"
         ],
         "post-update-cmd": [
             "@php artisan phmoney_provider:update",
