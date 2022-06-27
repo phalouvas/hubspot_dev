@@ -1,5 +1,5 @@
 {
-    "name": "phalouvas/hubspot",
+    "name": "smsto/hubspot",
     "description": "SMSto HubSpot integration Laravel package",
     "type": "library",
     "license": "GPL-3.0-or-later",
