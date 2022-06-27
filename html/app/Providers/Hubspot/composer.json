@@ -1,0 +1,31 @@
+{
+    "name": "phalouvas/hubspot",
+    "description": "SMSto HubSpot integration Laravel package",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Intergo Telecom Ltd",
+            "email": "support@sms.to"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Smsto\\Hubspot\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php artisan hubspot:install",
+            "@php artisan hubspot:update",
+            "@php artisan migrate"
+        ],
+        "post-update-cmd": [
+            "@php artisan phmoney_provider:update",
+            "@php artisan migrate"
+        ]
+    }
+}
