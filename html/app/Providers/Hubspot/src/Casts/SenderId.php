@@ -4,9 +4,10 @@ namespace Smsto\Hubspot\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use HubSpot\Factory;
+use Illuminate\Support\Facades\Http;
 use Smsto\Hubspot\Models\Settings;
 
-class AccessToken implements CastsAttributes
+class SenderId implements CastsAttributes
 {
     /**
      * Cast the given value.
@@ -19,23 +20,12 @@ class AccessToken implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        if (time() > $attributes['expires_at']) {
-            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
-                'refresh_token',
-                null,
-                route('hubspot.settings.create'),
-                config('hubspot.client_id'),
-                config('hubspot.client_secret'),
-                $attributes['refresh_token']
-            );
+        if (empty($value)) {
+            $response = Http::withToken($attributes['api_key'])->asJson()->acceptJson()->get('https://sms.to/api/v1/authenticated_user');
+            $response = json_decode($response, true);
+            $value = $response['user']['sender_id'];
             $settings = Settings::find($attributes['id']);
-            $settings->update([
-                'access_token' => $tokens->getAccessToken(),
-                'refresh_token' => $tokens->getRefreshToken(),
-                'expires_in' => $tokens->getExpiresIn(),
-                'expires_at' => time() + $tokens['expires_in'] * 0.95
-            ]);
-            return $tokens->getAccessToken();
+            $settings->update(['sender_id' => $value]);
         }
         return $value;
     }

@@ -73,6 +73,8 @@ class SmstoController extends Controller
             'hub_id' => $validated['origin']['portalId']
         ])->first();
 
+        $validated['inputFields']['sender_id'] = isset($validated['inputFields']['sender_id']) ? $validated['inputFields']['sender_id'] : $settings->sender_id;
+
         $api_key = $settings->api_key;
         $response = Http::withToken($api_key)->asJson()->acceptJson()->post('https://api.sms.to/sms/send', $validated['inputFields']);
         $response = json_decode($response, true);
