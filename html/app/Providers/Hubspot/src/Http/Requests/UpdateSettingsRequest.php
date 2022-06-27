@@ -23,7 +23,6 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', 'string'],
             'api_key' => ['required', 'string'],
             'sender_id' => ['required', 'string', 'max:9'],
             'show_reports' => ['string', 'nullable'],

@@ -7,6 +7,7 @@ use Smsto\Hubspot\Http\Requests\StoreSettingsRequest;
 use Smsto\Hubspot\Http\Requests\UpdateSettingsRequest;
 use Smsto\Hubspot\Models\Settings;
 use HubSpot\Factory;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -86,12 +87,17 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Settings $settings)
+    public function edit(Request $request)
     {
-        //
+        $settings = Settings::where([
+            'app_id' => $request->appId,
+            'hub_id' => $request->portalId,
+            'user_id' => $request->userId,
+        ])->firstOrFail();
+        return view('hubspot::settings.edit', ['settings' => $settings]);
     }
 
     /**
@@ -103,10 +109,8 @@ class SettingsController extends Controller
      */
     public function update(UpdateSettingsRequest $request, Settings $settings)
     {
-        $validated = $request->validate($request->rules());
-        $validated['show_reports'] = isset($validated['show_reports']) ? true : false;
-        $validated['show_people'] = isset($validated['show_people']) ? true : false;
-        return response($settings->update($validated));
+        $settings->update($request->validated());
+        return redirect()->back()->with('message', 'Settings saved successfully!!!');
     }
 
     /**

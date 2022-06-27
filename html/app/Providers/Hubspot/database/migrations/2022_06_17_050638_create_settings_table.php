@@ -30,7 +30,7 @@ return new class extends Migration
             $table->json('trial_scope_to_scope_group_pks');
             $table->integer('hub_id')->index();
             $table->integer('app_id')->index();
-            $table->integer('user_id');
+            $table->integer('user_id')->index();
 
             $table->text('api_key');
             $table->string('sender_id', 9)->nullable();
