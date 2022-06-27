@@ -5,6 +5,7 @@ namespace Smsto\Hubspot\Console;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Smsto\Hubspot\Models\Jsons;
 use Symfony\Component\Process\PhpExecutableFinder;
@@ -39,8 +40,24 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->seedUsers();
         $this->line('');
         $this->info('Hubspot installed successfully.');
+    }
+
+    /**
+     * Create administrator user
+     *
+     * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     *
+     * @return void
+     */
+    protected function seedUsers() {
+        \App\Models\User::factory()->create([
+            'name' => 'Administrator',
+            'email' => 'admin@sms.to',
+            'password' => Hash::make('admin'), // password
+       ]);
     }
 
 }
