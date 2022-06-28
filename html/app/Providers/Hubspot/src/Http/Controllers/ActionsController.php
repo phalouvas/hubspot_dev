@@ -85,7 +85,7 @@ class ActionsController extends Controller
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return redirect(route('hubspot.admin.actions.index'));
+        return redirect(route('hubspot.admin.actions.index'))->with('message', 'Saved successfully!!!');
     }
 
     /**
@@ -113,7 +113,7 @@ class ActionsController extends Controller
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return redirect(route('hubspot.admin.actions.index'));
+        return redirect(route('hubspot.admin.actions.index'))->with('message', 'Item archived successfully!!!');
     }
 
     /**
@@ -161,7 +161,7 @@ class ActionsController extends Controller
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return redirect(route('hubspot.admin.actions.index'));
+        return redirect(route('hubspot.admin.actions.index'))->with('message', 'Created successfully!!!');
     }
 
 }

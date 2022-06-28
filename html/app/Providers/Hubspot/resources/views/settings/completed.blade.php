@@ -1,7 +1,7 @@
 <x-hub-layout>
 
     <x-slot:title>
-        Settings Show
+        Settings Completed
         </x-slot>
 
         <div class="alert alert-success" role="alert">

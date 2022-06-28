@@ -18,7 +18,7 @@ Route::group(['prefix' => 'hubspot', 'middleware' => 'web'], function () {
     Route::prefix('/settings')->group(function () {
         Route::get('/create', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'create'])->name('hubspot.settings.create');
         Route::post('/store', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'store'])->name('hubspot.settings.store');
-        Route::get('/show/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'show'])->name('hubspot.settings.show');
+        Route::get('/completed/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'completed'])->name('hubspot.settings.completed');
         Route::get('/edit', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'edit'])->name('hubspot.settings.edit');
         Route::post('/update/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'update'])->name('hubspot.settings.update');
     });

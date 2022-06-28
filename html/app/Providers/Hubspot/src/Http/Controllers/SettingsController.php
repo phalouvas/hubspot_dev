@@ -70,18 +70,18 @@ class SettingsController extends Controller
         $validated['user_id'] = $api_response->getUserId();
 
         $settings = Settings::create($validated);
-        return redirect(route('hubspot.settings.show', ['settings' => $settings->id]));
+        return redirect(route('hubspot.settings.completed', ['settings' => $settings->id]));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  \Smsto\Hubspot\Models\Settings  $settings
      * @return \Illuminate\Http\Response
      */
-    public function show(Settings $settings)
+    public function completed(Settings $settings)
     {
-        return view('hubspot::settings.show', ['settings' => $settings]);
+        return view('hubspot::settings.completed', ['settings' => $settings]);
     }
 
     /**
@@ -104,7 +104,7 @@ class SettingsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateSettingsRequest  $request
-     * @param  \App\Models\Settings  $settings
+     * @param  \Smsto\Hubspot\Models\Settings  $settings
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSettingsRequest $request, Settings $settings)
@@ -116,11 +116,12 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Settings  $settings
+     * @param  Smsto\Hubspot\Models\Settings  $settings
      * @return \Illuminate\Http\Response
      */
     public function destroy(Settings $settings)
     {
-        //
+        $settings->delete();
+        return redirect()->back()->with('message', 'Item deleted successfully!!!');
     }
 }

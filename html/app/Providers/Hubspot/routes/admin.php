@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix' => 'hubspot/admin', 'middleware' => 'web', 'middleware' => 'auth.basic'], function () {
+Route::group(['prefix' => 'hubspot/admin', 'middleware' => ['web', 'auth.basic']], function () {
 
     Route::prefix('/actions')->group(function () {
         Route::get('/', [\Smsto\Hubspot\Http\Controllers\ActionsController::class, 'index'])->name('hubspot.admin.actions.index');
@@ -17,7 +17,7 @@ Route::group(['prefix' => 'hubspot/admin', 'middleware' => 'web', 'middleware' =
 
     Route::prefix('/settings')->group(function () {
         Route::get('/', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'index'])->name('hubspot.admin.settings.index');
-        Route::delete('/destroy/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'destroy'])->name('hubspot.admin.settings.destroy');
+        Route::post('/destroy/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'destroy'])->name('hubspot.admin.settings.destroy');
     });
 
 });

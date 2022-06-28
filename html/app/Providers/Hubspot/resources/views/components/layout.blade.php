@@ -102,7 +102,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.settings.index' ? 'active' : '' !!}" href="{{ route('hubspot.admin.settings.index') }}">
-                                <span data-feather="file" class="align-text-bottom"></span>
+                                <span data-feather="list" class="align-text-bottom"></span>
                                 Settings
                             </a>
                         </li>
@@ -113,6 +113,11 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h2>{{ $title ?? 'SMSto HubSpot Integration' }}</h2>
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
                 {{ $slot }}
             </main>
         </div>

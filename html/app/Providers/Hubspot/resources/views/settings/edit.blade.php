@@ -4,12 +4,6 @@
         Settings Edit
         </x-slot>
 
-        @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-        @endif
-
         <form action="{{route('hubspot.settings.update', ['settings' => $settings->id])}}" method="POST">
             @csrf
 
