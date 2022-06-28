@@ -1,4 +1,4 @@
-<x-hubspot>
+<x-hub-layout>
 
     <x-slot:title>
         Home
@@ -6,4 +6,4 @@
 
         <p>Welcome to SMSto HubSpot integration home page.</p>
 
-</x-hubspot>
+</x-hub-layout>

@@ -34,7 +34,6 @@ class UpdateCommand extends Command
      */
     public function handle()
     {
-        $this->copyStubs();
         $this->updateActions();
         $this->line('');
         $this->info('Hubspot updated successfully.');
@@ -86,10 +85,4 @@ class UpdateCommand extends Command
         }
     }
 
-    protected function copyStubs() {
-        if (!is_dir(resource_path('views/components'))) {
-            mkdir(resource_path('views/components'));
-        }
-        copy(__DIR__.'/../../stubs/resources/components/hubspot.blade.php', resource_path('views/components/hubspot.blade.php'));
-    }
 }

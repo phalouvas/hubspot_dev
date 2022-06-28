@@ -2,7 +2,9 @@
 
 namespace Smsto\Hubspot;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class HubspotServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,7 @@ class HubspotServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'hubspot');
+        $this->configureComponents();
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/admin.php');
@@ -46,5 +49,28 @@ class HubspotServiceProvider extends ServiceProvider
             Console\InstallCommand::class,
             Console\UpdateCommand::class,
         ]);
+    }
+
+    /**
+     * Configure the Blade components.
+     * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     * @return void
+     */
+    protected function configureComponents()
+    {
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            $this->registerComponent('layout');
+        });
+    }
+
+    /**
+     * Register the given component.
+     *
+     * @param  string  $component
+     * @return void
+     */
+    protected function registerComponent(string $component)
+    {
+        Blade::component('hubspot::components.'.$component, 'hub-'.$component);
     }
 }
