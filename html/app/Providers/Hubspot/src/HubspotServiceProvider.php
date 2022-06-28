@@ -19,6 +19,7 @@ class HubspotServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/hubspot.php', 'hubspot');
+        $this->mergeConfigFrom(__DIR__.'/../config/database.php', 'database.connections');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 

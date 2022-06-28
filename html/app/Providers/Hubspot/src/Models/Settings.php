@@ -16,6 +16,13 @@ class Settings extends Model
     use HasFactory;
 
     /**
+     * The connection name for the model.
+     *
+     * @var string|null
+     */
+    protected $connection = 'hubspot';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
