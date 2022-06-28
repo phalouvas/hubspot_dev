@@ -102,8 +102,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.settings.index' ? 'active' : '' !!}" href="{{ route('hubspot.admin.settings.index') }}">
-                                <span data-feather="list" class="align-text-bottom"></span>
-                                Settings
+                                <span data-feather="users" class="align-text-bottom"></span>
+                                Users
                             </a>
                         </li>
                     </ul>

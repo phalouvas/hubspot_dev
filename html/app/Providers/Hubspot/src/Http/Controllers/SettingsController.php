@@ -110,7 +110,7 @@ class SettingsController extends Controller
     public function update(UpdateSettingsRequest $request, Settings $settings)
     {
         $settings->update($request->validated());
-        return redirect()->back()->with('message', 'Settings saved successfully!!!');
+        return redirect()->back()->with('message', 'Saved successfully!!!');
     }
 
     /**
@@ -122,6 +122,6 @@ class SettingsController extends Controller
     public function destroy(Settings $settings)
     {
         $settings->delete();
-        return redirect()->back()->with('message', 'Item deleted successfully!!!');
+        return redirect()->back()->with('message', 'Deleted successfully!!!');
     }
 }

@@ -1,7 +1,7 @@
 <x-hub-layout>
 
     <x-slot:title>
-        Settings
+        Users
         </x-slot>
 
         <div class="table-responsive">
