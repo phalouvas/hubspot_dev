@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'hubspot', 'middleware' => 'api'], function () {
+Route::group(['prefix' => 'hubspot/api', 'middleware' => 'api'], function () {
 
     Route::prefix('/smsto')->group(function () {
         Route::get('/params', [\Smsto\Hubspot\Http\Controllers\SmstoController::class, 'params'])->name('hubspot.smsto.params');

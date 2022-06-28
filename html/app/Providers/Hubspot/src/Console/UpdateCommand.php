@@ -3,7 +3,9 @@
 namespace Smsto\Hubspot\Console;
 
 use Exception;
+use HubSpot\Client\Files\Model\Folder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class UpdateCommand extends Command
 {
@@ -14,7 +16,7 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hubspot:update {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
+    protected $signature = 'hubspot:update';
 
     /**
      * The console command description.
@@ -34,6 +36,7 @@ class UpdateCommand extends Command
      */
     public function handle()
     {
+        $this->copyStubs();
         $this->updateActions();
         $this->line('');
         $this->info('Hubspot updated successfully.');
@@ -83,6 +86,11 @@ class UpdateCommand extends Command
             $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
         }
+    }
+
+    protected function copyStubs() {
+        File::deleteDirectory(public_path('assets/hubspot'));
+        File::copyDirectory(__DIR__.'/../../stubs/public/assets', public_path('assets/hubspot'));
     }
 
 }

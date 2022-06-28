@@ -1,4 +1,4 @@
-<x-hubspot>
+<x-hub-layout>
 
     <x-slot:title>
         Settings Create
@@ -34,4 +34,4 @@
             <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>
-</x-hubspot>
+</x-hub-layout>

@@ -15,4 +15,9 @@ Route::group(['prefix' => 'hubspot/admin', 'middleware' => 'web', 'middleware' =
         Route::get('/{action_id}/archive', [\Smsto\Hubspot\Http\Controllers\ActionsController::class, 'archive'])->name('hubspot.admin.actions.archive');
     });
 
+    Route::prefix('/settings')->group(function () {
+        Route::get('/', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'index'])->name('hubspot.admin.settings.index');
+        Route::delete('/destroy/{settings}', [\Smsto\Hubspot\Http\Controllers\SettingsController::class, 'destroy'])->name('hubspot.admin.settings.destroy');
+    });
+
 });

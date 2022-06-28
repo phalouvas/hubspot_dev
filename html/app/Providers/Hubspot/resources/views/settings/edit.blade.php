@@ -1,4 +1,4 @@
-<x-hubspot>
+<x-hub-layout>
 
     <x-slot:title>
         Settings Edit
@@ -48,4 +48,4 @@
 
         </form>
 
-</x-hubspot>
+</x-hub-layout>

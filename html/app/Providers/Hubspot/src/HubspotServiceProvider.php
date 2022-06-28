@@ -2,6 +2,7 @@
 
 namespace Smsto\Hubspot;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -35,6 +36,7 @@ class HubspotServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadRoutesFrom(__DIR__.'/../routes/admin.php');
+        Paginator::useBootstrapFive();
 
         $this->notRunningInConsole();
 

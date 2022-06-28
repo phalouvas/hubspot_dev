@@ -1,14 +1,14 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SMSto HubSpot Integration package">
-    <meta name="author" content="Intergo Telecom Ltd,">
-    <title>SMSto HubSpot Integration - {{ $title ?? '' }}</title>
-    <link href="/assets/hubspot/dist/css/bootstrap.min.css" rel="stylesheet" />
 
+    <title>{{ $title ?? 'SMSto HubSpot Integration' }}</title>
+
+    <!-- Bootstrap -->
+    <link href="/assets/hubspot/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -61,15 +61,16 @@
             -webkit-overflow-scrolling: touch;
         }
     </style>
+    <script src="/assets/hubspot/js/bootstrap.min.js"></script>
 
-    <!-- Custom styles for this template -->
-    <link href="/assets/hubspot/dist/css/dashboard.min.css" rel="stylesheet" />
 </head>
 
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto HubSpot Integration</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto
+            HubSpot
+            Integration</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -78,10 +79,10 @@
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 @auth
-                <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Sign out</a>
+                <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Home</a>
                 @endauth
                 @guest
-                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Sign in</a>
+                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Admin</a>
                 @endguest
             </div>
         </div>
@@ -94,14 +95,12 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.actions.index' ? 'active' : '' !!}" aria-current="page" href="{{ route('hubspot.admin.actions.index') }}">
-                                <span data-feather="home" class="align-text-bottom"></span>
+                            <a class="nav-link" aria-current="page" href="{{ route('hubspot.admin.actions.index') }}">
                                 Actions
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.settings.index' ? 'active' : '' !!}" href="{{ route('hubspot.admin.settings.index') }}">
-                                <span data-feather="file" class="align-text-bottom"></span>
+                            <a class="nav-link" aria-current="page" href="{{ route('hubspot.admin.settings.index') }}">
                                 Settings
                             </a>
                         </li>
@@ -117,13 +116,14 @@
         </div>
     </div>
 
+    <footer class="navbar navbar-light sticky-bottom bg-light flex-md-nowrap p-6 shadow">
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="https://sms.to">SMSto - All rights reserved</a>
+            </div>
+        </div>
+    </footer>
 
-    <script src="/assets/hubspot/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
-        crossorigin="anonymous"></script>
-    <script src="/assets/hubspot/dist/js/dashboard.min.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<x-hubspot>
+<x-hub-layout>
 
     <x-slot:title>
         Settings Show
@@ -9,4 +9,4 @@
         </div>
         <a href="https://app.hubspot.com/home" class="btn btn-primary">Continue</a>
 
-</x-hubspot>
+</x-hub-layout>

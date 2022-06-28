@@ -18,7 +18,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return response(Settings::paginate());
+        return view('hubspot::settings.index', ['settings' => Settings::paginate()]);
     }
 
     /**
