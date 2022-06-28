@@ -75,13 +75,14 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="w-100"></div>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 @auth
-                <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Sign out</a>
+                <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Home</a>
                 @endauth
                 @guest
-                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Sign in</a>
+                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Home</a>
                 @endguest
             </div>
         </div>
