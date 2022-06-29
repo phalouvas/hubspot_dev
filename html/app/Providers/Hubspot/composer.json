@@ -26,8 +26,18 @@
             "@php artisan migrate"
         ],
         "post-update-cmd": [
-            "@php artisan phmoney_provider:update",
+            "@php artisan hubspot:update",
             "@php artisan migrate"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Smsto\\Hubspot\\HubspotServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
