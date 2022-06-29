@@ -56,13 +56,14 @@ class UpdateCommand extends Command
      *
      * @return void
      */
-    protected function seedUsers() {
-        if(User::first() == null) {
+    protected function seedUsers()
+    {
+        if (User::first() == null) {
             User::factory()->create([
                 'name' => 'Administrator',
                 'email' => 'admin@sms.to',
                 'password' => Hash::make('admin'), // password
-           ]);
+            ]);
         }
     }
 
@@ -71,34 +72,30 @@ class UpdateCommand extends Command
      * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
      * @return void
      */
-    protected function setConfigDatabase() {
-        if (!Schema::connection('hubspot')->hasTable('settings')) {
-            $connection_name = DB::getDefaultConnection();
-            $connections = config('database.connections');
-            $default_connection = $connections[$connection_name];
-            $default_connection['prefix'] = 'hubspot_';
-            $default_connection['strict'] = 1;
-            $path = __DIR__ . '/../../config/database.php';
-            $search = "'hubspot' => [],";
-            $replace = "'hubspot' => [" . PHP_EOL;
-            foreach ($default_connection as $key => $value) {
-                $replace .= "           '$key' => ";
-                if (is_string($value)) {
-                    $replace .= "'$value'," . PHP_EOL;
-                }
-                elseif (is_array($value)) {
-                    $replace .= "[]," . PHP_EOL;
-                }
-                elseif (is_null($value)) {
-                    $replace .= "null," . PHP_EOL;
-                }
-                else {
-                    $replace .= "$value," . PHP_EOL;
-                }
+    protected function setConfigDatabase()
+    {
+        $connection_name = DB::getDefaultConnection();
+        $connections = config('database.connections');
+        $default_connection = $connections[$connection_name];
+        $default_connection['prefix'] = 'hubspot_';
+        $default_connection['strict'] = 1;
+        $path = __DIR__ . '/../../config/database.php';
+        $search = "'hubspot' => [],";
+        $replace = "'hubspot' => [" . PHP_EOL;
+        foreach ($default_connection as $key => $value) {
+            $replace .= "           '$key' => ";
+            if (is_string($value)) {
+                $replace .= "'$value'," . PHP_EOL;
+            } elseif (is_array($value)) {
+                $replace .= "[]," . PHP_EOL;
+            } elseif (is_null($value)) {
+                $replace .= "null," . PHP_EOL;
+            } else {
+                $replace .= "$value," . PHP_EOL;
             }
-            $replace .= "       ],";
-            $this->replaceInFile($search, $replace, $path);
         }
+        $replace .= "       ],";
+        $this->replaceInFile($search, $replace, $path);
     }
 
     /**
@@ -165,9 +162,9 @@ class UpdateCommand extends Command
      *
      * @return void
      */
-    protected function copyStubs() {
+    protected function copyStubs()
+    {
         File::deleteDirectory(public_path('assets/hubspot'));
-        File::copyDirectory(__DIR__.'/../../stubs/public/assets', public_path('assets/hubspot'));
+        File::copyDirectory(__DIR__ . '/../../stubs/public/assets', public_path('assets/hubspot'));
     }
-
 }
