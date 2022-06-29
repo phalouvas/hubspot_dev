@@ -5,6 +5,7 @@ namespace Smsto\Hubspot;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 
@@ -19,9 +20,13 @@ class HubspotServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/hubspot.php', 'hubspot');
-        $this->mergeConfigFrom(__DIR__ . '/../config/database.php', 'database.connections');
-        $this->setConfigDatabase();
+        try {
+            $this->mergeConfigFrom(config_path('hubspot.php'), 'hubspot');
+            $this->mergeConfigFrom(config_path('hubspot_connection.php'), 'database.connections');
+        } catch (\Throwable $th) {
+            $this->install();
+        }
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
@@ -80,37 +85,40 @@ class HubspotServiceProvider extends ServiceProvider
     }
 
     /**
-     * Set the connection in database config file
+     * First time run
+     *
      * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
+     *
      * @return void
      */
-    protected function setConfigDatabase()
+    protected function install()
     {
-        if (empty(config('database.connections.hubspot'))) {
-            $connection_name = DB::getDefaultConnection();
-            $connections = config('database.connections');
-            $default_connection = $connections[$connection_name];
-            $default_connection['prefix'] = 'hubspot_';
-            $default_connection['strict'] = 1;
-            $path = __DIR__ . '/../config/database.php';
-            $search = "'hubspot' => [],";
-            $replace = "'hubspot' => [" . PHP_EOL;
-            foreach ($default_connection as $key => $value) {
-                $replace .= "           '$key' => ";
-                if (is_string($value)) {
-                    $replace .= "'$value'," . PHP_EOL;
-                } elseif (is_array($value)) {
-                    $replace .= "[]," . PHP_EOL;
-                } elseif (is_null($value)) {
-                    $replace .= "null," . PHP_EOL;
-                } else {
-                    $replace .= "$value," . PHP_EOL;
-                }
-            }
-            $replace .= "       ],";
+        File::copy(__DIR__ . '/../stubs/config/hubspot.php', config_path('hubspot.php'));
+        File::copy(__DIR__ . '/../stubs/config/hubspot_connection.php', config_path('hubspot_connection.php'));
 
-            file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
-            config()->set('database.connections.hubspot', $default_connection);
+        $connection_name = DB::getDefaultConnection();
+        $connections = config('database.connections');
+        $default_connection = $connections[$connection_name];
+        $default_connection['prefix'] = 'hubspot_';
+        $default_connection['strict'] = 1;
+        $search = "'hubspot' => [],";
+        $replace = "'hubspot' => [" . PHP_EOL;
+        foreach ($default_connection as $key => $value) {
+            $replace .= "           '$key' => ";
+            if (is_string($value)) {
+                $replace .= "'$value'," . PHP_EOL;
+            } elseif (is_array($value)) {
+                $replace .= "[]," . PHP_EOL;
+            } elseif (is_null($value)) {
+                $replace .= "null," . PHP_EOL;
+            } else {
+                $replace .= "$value," . PHP_EOL;
+            }
         }
+        $replace .= "       ],";
+
+        file_put_contents(config_path('hubspot_connection.php'), str_replace($search, $replace, file_get_contents(config_path('hubspot_connection.php'))));
+        config()->set('database.connections.hubspot', $default_connection);
     }
+
 }
