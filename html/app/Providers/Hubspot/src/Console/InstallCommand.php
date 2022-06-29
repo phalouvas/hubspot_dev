@@ -2,14 +2,10 @@
 
 namespace Smsto\Hubspot\Console;
 
+use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Smsto\Hubspot\Models\Jsons;
-use Symfony\Component\Process\PhpExecutableFinder;
-use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
@@ -54,11 +50,13 @@ class InstallCommand extends Command
      * @return void
      */
     protected function seedUsers() {
-        \App\Models\User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'admin@sms.to',
-            'password' => Hash::make('admin'), // password
-       ]);
+        if(User::first() == null) {
+            User::factory()->create([
+                'name' => 'Administrator',
+                'email' => 'admin@sms.to',
+                'password' => Hash::make('admin'), // password
+           ]);
+        }
     }
 
     /**

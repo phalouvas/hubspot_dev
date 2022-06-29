@@ -11,7 +11,9 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require": {},
+    "require": {
+        "hubspot/api-client": "^8.2"
+    },
     "autoload": {
         "psr-4": {
             "Smsto\\Hubspot\\": "src/"
@@ -19,9 +21,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php artisan migrate",
             "@php artisan hubspot:install",
-            "@php artisan hubspot:update"
+            "@php artisan hubspot:update",
+            "@php artisan migrate"
         ],
         "post-update-cmd": [
             "@php artisan phmoney_provider:update",
