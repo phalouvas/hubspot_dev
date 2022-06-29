@@ -82,7 +82,7 @@
                 <a class="nav-link px-3" href="{{ route('hubspot.home') }}">Home</a>
                 @endauth
                 @guest
-                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Home</a>
+                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Admin</a>
                 @endguest
             </div>
         </div>
