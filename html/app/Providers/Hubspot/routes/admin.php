@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix' => 'hubspot/admin', 'middleware' => ['web', 'auth.basic']], function () {
+Route::group(['prefix' => 'hubspot/admin', 'middleware' => ['web', config('hubspot.auth_middleware')]], function () {
 
     Route::prefix('/actions')->group(function () {
         Route::get('/', [\Smsto\Hubspot\Http\Controllers\ActionsController::class, 'index'])->name('hubspot.admin.actions.index');
