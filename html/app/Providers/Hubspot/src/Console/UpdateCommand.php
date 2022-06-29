@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class UpdateCommand extends Command
 {
@@ -71,31 +72,33 @@ class UpdateCommand extends Command
      * @return void
      */
     protected function setConfigDatabase() {
-        $connection_name = DB::getDefaultConnection();
-        $connections = config('database.connections');
-        $default_connection = $connections[$connection_name];
-        $default_connection['prefix'] = 'hubspot_';
-        $default_connection['strict'] = 1;
-        $path = __DIR__ . '/../../config/database.php';
-        $search = "'hubspot' => [],";
-        $replace = "'hubspot' => [" . PHP_EOL;
-        foreach ($default_connection as $key => $value) {
-            $replace .= "           '$key' => ";
-            if (is_string($value)) {
-                $replace .= "'$value'," . PHP_EOL;
+        if (!Schema::connection('hubspot')->hasTable('settings')) {
+            $connection_name = DB::getDefaultConnection();
+            $connections = config('database.connections');
+            $default_connection = $connections[$connection_name];
+            $default_connection['prefix'] = 'hubspot_';
+            $default_connection['strict'] = 1;
+            $path = __DIR__ . '/../../config/database.php';
+            $search = "'hubspot' => [],";
+            $replace = "'hubspot' => [" . PHP_EOL;
+            foreach ($default_connection as $key => $value) {
+                $replace .= "           '$key' => ";
+                if (is_string($value)) {
+                    $replace .= "'$value'," . PHP_EOL;
+                }
+                elseif (is_array($value)) {
+                    $replace .= "[]," . PHP_EOL;
+                }
+                elseif (is_null($value)) {
+                    $replace .= "null," . PHP_EOL;
+                }
+                else {
+                    $replace .= "$value," . PHP_EOL;
+                }
             }
-            elseif (is_array($value)) {
-                $replace .= "[]," . PHP_EOL;
-            }
-            elseif (is_null($value)) {
-                $replace .= "null," . PHP_EOL;
-            }
-            else {
-                $replace .= "$value," . PHP_EOL;
-            }
+            $replace .= "       ],";
+            $this->replaceInFile($search, $replace, $path);
         }
-        $replace .= "       ],";
-        $this->replaceInFile($search, $replace, $path);
     }
 
     /**
