@@ -13,7 +13,7 @@ return [
             'payload' =>
             '
             {
-                "actionUrl": "' . env('APP_URL') . '/hubspot/smsto/send",
+                "actionUrl": "' . env('APP_URL') . '/hubspot/api/smsto/send",
                 "published": true,
                 "inputFields": [
                     {
