@@ -1,4 +1,4 @@
-<x-hub-layout title="Settings Details">
+<x-hub-layout title="User Details">
     <table class="table">
         <tbody>
             <tr>
@@ -57,7 +57,10 @@
         <tfoot>
             <tr>
                 <td colspan="2">
-                    <a href="{{route('hubspot.admin.settings.index')}}" class="btn btn-secondary"><span data-feather="x" class="align-text-bottom" title="Close"></span></a>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <a href="{{route('hubspot.settings.edit')}}?appId={{$settings->app_id}}&portalId={{$settings->hub_id}}&userId={{$settings->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
+                        <a href="{{route('hubspot.admin.settings.index')}}" class="btn btn-secondary" title="Close"><span data-feather="x" class="align-text-bottom"></span></a>
+                    </div>
                 </td>
             </tr>
         </tfoot>
