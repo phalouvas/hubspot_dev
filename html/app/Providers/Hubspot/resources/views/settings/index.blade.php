@@ -16,21 +16,24 @@
                     <td>{{ $setting['user'] }}</td>
                     <td>{{ $setting['hub_domain'] }}</td>
                     <td>
-                        <form method="POST"
-                            action="{{route('hubspot.admin.settings.destroy', ['settings' => $setting])}}">
-                            @csrf
-                            <button type="button" class="btn btn-danger" title="Delete"
-                                onclick="if (confirm('You are about to permanently delete this item. Are you sure?')) {submit()}">
-                                <span data-feather="trash" class="align-text-bottom"></span>
-                            </button>
-                        </form>
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <a href="{{route('hubspot.admin.settings.show', ['settings' => $setting])}}" class="btn btn-warning" title="Details"><span data-feather="zoom-in" class="align-text-bottom"></span></a>
+                            <form method="POST"
+                                action="{{route('hubspot.admin.settings.destroy', ['settings' => $setting])}}">
+                                @csrf
+                                <button type="button" class="btn btn-danger" title="Delete"
+                                    onclick="if (confirm('You are about to permanently delete this item. Are you sure?')) {submit()}">
+                                    <span data-feather="trash" class="align-text-bottom"></span>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         {!! $settings->links() !!}
                     </td>
                 </tr>

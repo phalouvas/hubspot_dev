@@ -79,6 +79,17 @@ class SettingsController extends Controller
      * @param  \Smsto\Hubspot\Models\Settings  $settings
      * @return \Illuminate\Http\Response
      */
+    public function show(Settings $settings)
+    {
+        return view('hubspot::settings.show', ['settings' => $settings]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Smsto\Hubspot\Models\Settings  $settings
+     * @return \Illuminate\Http\Response
+     */
     public function completed(Settings $settings)
     {
         return view('hubspot::settings.completed', ['settings' => $settings]);
