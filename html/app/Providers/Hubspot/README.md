@@ -2,7 +2,7 @@
 
 ## Installation
 
-`composer require smsto/hubspot`
+`composer require intergo/hubspot`
 
 Add in env file the authentication middleware used in project.
 
