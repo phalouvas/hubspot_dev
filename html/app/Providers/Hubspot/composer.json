@@ -1,5 +1,5 @@
 {
-    "name": "phalouvas/hubspot",
+    "name": "intergo/hubspot",
     "description": "SMSto HubSpot integration Laravel package",
     "type": "library",
     "license": "GPL-3.0-or-later",
@@ -14,6 +14,10 @@
     "require": {
         "hubspot/api-client": "^8.2"
     },
+    "repositories": [{
+        "type": "composer",
+        "url": "https://pkg.registry.intergotelecom.com"
+    }],
     "autoload": {
         "psr-4": {
             "Smsto\\Hubspot\\": "src/"
