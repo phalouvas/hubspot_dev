@@ -1,9 +1,11 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Requests;
+namespace Smsto\Hubspot\Http\Requests\Web;
 
+use Smsto\Hubspot\Http\Requests\FormRequest;
+use Smsto\Hubspot\Rules\ApiKey;
 
-class UpdateSettingsRequest extends FormRequest
+class StoreSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +25,9 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'api_key' => ['required', 'string'],
-            'sender_id' => ['required', 'string', 'max:9'],
+            'code' => ['required', 'string'],
+            'api_key' => ['required', 'string', new ApiKey],
+            'sender_id' => ['string', 'max:9', 'nullable'],
             'show_reports' => ['string', 'nullable'],
             'show_people' => ['string', 'nullable'],
         ];

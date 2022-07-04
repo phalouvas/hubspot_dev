@@ -1,26 +1,15 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Controllers;
+namespace Smsto\Hubspot\Http\Controllers\Web;
 
-use Smsto\Hubspot\Http\Requests\CreateSettingsRequest;
-use Smsto\Hubspot\Http\Requests\StoreSettingsRequest;
-use Smsto\Hubspot\Http\Requests\UpdateSettingsRequest;
+use Smsto\Hubspot\Http\Requests\Web\CreateSettingsRequest;
+use Smsto\Hubspot\Http\Requests\Web\StoreSettingsRequest;
+use Smsto\Hubspot\Http\Requests\Web\UpdateSettingsRequest;
 use Smsto\Hubspot\Models\Settings;
 use HubSpot\Factory;
-use Illuminate\Http\Request;
 
-class SettingsController extends Controller
+class SettingsController extends WebController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('hubspot::settings.index', ['settings' => Settings::paginate()]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +36,7 @@ class SettingsController extends Controller
         $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
             'authorization_code',
             $validated['code'],
-            route('hubspot.settings.create'),
+            route('hubspot.web.settings.create'),
             config('hubspot.client_id'),
             config('hubspot.client_secret')
         );
@@ -70,18 +59,7 @@ class SettingsController extends Controller
         $validated['user_id'] = $api_response->getUserId();
 
         $settings = Settings::create($validated);
-        return redirect(route('hubspot.settings.completed', ['settings' => $settings->id]));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Smsto\Hubspot\Models\Settings  $settings
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Settings $settings)
-    {
-        return view('hubspot::settings.show', ['settings' => $settings]);
+        return redirect(route('hubspot.web.settings.completed', ['settings' => $settings->id]));
     }
 
     /**
@@ -98,16 +76,11 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Illuminate\Http\Request  $request
+     * @param  \Smsto\Hubspot\Models\Settings  $settings
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Settings $settings)
     {
-        $settings = Settings::where([
-            'app_id' => $request->appId,
-            'hub_id' => $request->portalId,
-            'user_id' => $request->userId,
-        ])->firstOrFail();
         return view('hubspot::settings.edit', ['settings' => $settings]);
     }
 
@@ -124,15 +97,4 @@ class SettingsController extends Controller
         return redirect()->back()->with('message', 'Saved successfully!!!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Smsto\Hubspot\Models\Settings  $settings
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Settings $settings)
-    {
-        $settings->delete();
-        return redirect()->back()->with('message', 'Deleted successfully!!!');
-    }
 }

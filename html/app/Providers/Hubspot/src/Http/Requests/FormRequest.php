@@ -8,5 +8,5 @@ use Illuminate\Validation\ValidationException;
 
 class FormRequest extends ParentFormRequest
 {
-    //protected $redirectRoute = "hubspot.error";
+    //protected $redirectRoute = "hubspot.web.error";
 }

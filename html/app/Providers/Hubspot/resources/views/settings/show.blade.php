@@ -58,7 +58,7 @@
             <tr>
                 <td colspan="2">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <a href="{{route('hubspot.settings.edit')}}?appId={{$settings->app_id}}&portalId={{$settings->hub_id}}&userId={{$settings->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
+                        <a href="{{route('hubspot.web.settings.edit')}}?appId={{$settings->app_id}}&portalId={{$settings->hub_id}}&userId={{$settings->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
                         <a href="{{route('hubspot.admin.settings.index')}}" class="btn btn-secondary" title="Close"><span data-feather="x" class="align-text-bottom"></span></a>
                     </div>
                 </td>

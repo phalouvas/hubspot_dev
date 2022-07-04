@@ -1,5 +1,5 @@
 <x-hub-layout title="Settings Edit">
-    <form action="{{route('hubspot.settings.update', ['settings' => $settings->id])}}" method="POST">
+    <form action="{{route('hubspot.web.settings.update', ['settings' => $settings->id])}}" method="POST">
         @csrf
 
         <div class="mb-3">

@@ -1,17 +1,14 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Controllers;
+namespace Smsto\Hubspot\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Smsto\Hubspot\Http\Requests\SmstoRequest;
-use Smsto\Hubspot\Http\Requests\SendSmstoRequest;
+use Smsto\Hubspot\Http\Requests\Api\SmstoRequest;
+use Smsto\Hubspot\Http\Requests\Api\SendSmstoRequest;
 use Smsto\Hubspot\Models\Settings;
-use HubSpot\Factory;
-use HubSpot\Client\Crm\Timeline\ApiException;
-use HubSpot\Client\Crm\Timeline\Model\TimelineEvent;
 
-class SmstoController extends Controller
+class SmstoController extends AdminController
 {
     /**
      * Get params

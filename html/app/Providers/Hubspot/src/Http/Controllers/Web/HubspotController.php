@@ -1,12 +1,12 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Controllers;
+namespace Smsto\Hubspot\Http\Controllers\Web;
 
 use Smsto\Hubspot\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class HubspotController extends Controller
+class HubspotController extends WebController
 {
 
     /**
@@ -36,8 +36,8 @@ class HubspotController extends Controller
         $response = Http::get('https://integration.sms.to/component_bulk_sms/manifest.json');
         $manifest = json_decode($response, true);
         $data = [
-            'VITE_ROUTE_PARAMS' =>  route('hubspot.smsto.params'),
-            'VITE_ROUTE_SMSTO' =>  route('hubspot.smsto.call'),
+            'VITE_ROUTE_PARAMS' =>  route('hubspot.api.smsto.params'),
+            'VITE_ROUTE_SMSTO' =>  route('hubspot.api.smsto.call'),
             'assets_link' => $manifest['src/main.ts']['css'][0],
             'js_link' => $manifest['src/main.ts']['file'],
             'sender_id' => $settings->sender_id,

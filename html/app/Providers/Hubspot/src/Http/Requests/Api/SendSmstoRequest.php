@@ -1,6 +1,8 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Requests;
+namespace Smsto\Hubspot\Http\Requests\Api;
+
+use Smsto\Hubspot\Http\Requests\FormRequest;
 
 class SendSmstoRequest extends FormRequest
 {

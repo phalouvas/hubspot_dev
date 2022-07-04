@@ -17,7 +17,7 @@
                     <td>{{ $setting['hub_domain'] }}</td>
                     <td>
                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <a href="{{route('hubspot.settings.edit')}}?appId={{$setting->app_id}}&portalId={{$setting->hub_id}}&userId={{$setting->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
+                            <a href="{{route('hubspot.web.settings.edit')}}?appId={{$setting->app_id}}&portalId={{$setting->hub_id}}&userId={{$setting->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
                             <a href="{{route('hubspot.admin.settings.show', ['settings' => $setting])}}" class="btn btn-warning" title="Details"><span data-feather="zoom-in" class="align-text-bottom"></span></a>
                             <form method="POST"
                                 action="{{route('hubspot.admin.settings.destroy', ['settings' => $setting])}}">

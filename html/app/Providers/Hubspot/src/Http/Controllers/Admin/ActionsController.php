@@ -1,12 +1,11 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Controllers;
+namespace Smsto\Hubspot\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Smsto\Hubspot\Http\Requests\UpdateActionsRequest;
-use Smsto\Hubspot\Models\Jsons;
+use Smsto\Hubspot\Http\Requests\Admin\UpdateActionsRequest;
 
-class ActionsController extends Controller
+class ActionsController extends AdminController
 {
     /**
      * Display a listing of the resource.

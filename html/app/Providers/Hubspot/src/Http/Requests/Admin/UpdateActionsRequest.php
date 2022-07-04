@@ -1,8 +1,10 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Requests;
+namespace Smsto\Hubspot\Http\Requests\Admin;
 
-class StoreSettingsRequest extends FormRequest
+use Smsto\Hubspot\Http\Requests\FormRequest;
+
+class UpdateActionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +24,8 @@ class StoreSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', 'string'],
-            'api_key' => ['required', 'string'],
-            'sender_id' => ['string', 'max:9', 'nullable'],
-            'show_reports' => ['string', 'nullable'],
-            'show_people' => ['string', 'nullable'],
+            'actionUrl' => ['required', 'string'],
+            'published' => ['required', 'boolean'],
         ];
     }
 }

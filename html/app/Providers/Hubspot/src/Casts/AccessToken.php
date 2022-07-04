@@ -23,7 +23,7 @@ class AccessToken implements CastsAttributes
             $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
                 'refresh_token',
                 null,
-                route('hubspot.settings.create'),
+                route('hubspot.web.settings.create'),
                 config('hubspot.client_id'),
                 config('hubspot.client_secret'),
                 $attributes['refresh_token']

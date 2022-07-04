@@ -1,5 +1,5 @@
 <x-hub-layout title="Settings Create">
-    <form action="{{route('hubspot.settings.store')}}" method="POST">
+    <form action="{{route('hubspot.web.settings.store')}}" method="POST">
         @csrf
 
         <input id="code" name="code" type="hidden" value="{{ $code }}" />

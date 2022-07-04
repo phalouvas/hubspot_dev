@@ -1,8 +1,10 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Requests;
+namespace Smsto\Hubspot\Http\Requests\Web;
 
-class SmstoRequest extends FormRequest
+use Smsto\Hubspot\Http\Requests\FormRequest;
+
+class CreateSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +24,7 @@ class SmstoRequest extends FormRequest
     public function rules()
     {
         return [
-            '_method' => ['required', 'string'],
-            '_url' => ['required', 'string'],
-            'payload' => ['string']
+            'code' => ['required', 'string', 'max:36'],
         ];
     }
 }
