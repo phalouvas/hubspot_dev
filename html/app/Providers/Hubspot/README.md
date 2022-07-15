@@ -7,6 +7,14 @@ In order to work succesfully with HubSpot the follow are required:
 
 ## Installation
 
+Add in composer.json file the follow:
+```
+"repositories": [{
+        "type": "composer",
+        "url": "https://pkg.registry.intergotelecom.com"
+    }],
+```
+
 `composer require intergo/hubspot`
 
 Add in env file the authentication middleware used in project.

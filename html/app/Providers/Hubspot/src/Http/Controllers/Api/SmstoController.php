@@ -15,12 +15,11 @@ class SmstoController extends AdminController
      *
      * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
      *
-     * @param Request $request
+     * @param Smsto\Hubspot\Models\Settings $settings
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
-    public function params(Request $request)
+    public function params(Settings $settings)
     {
-        $settings = Settings::select('show_reports', 'show_people')->first();
         $response = [
             "success" => true,
             "message" => null,
@@ -40,15 +39,15 @@ class SmstoController extends AdminController
      * @author Panayiotis Halouvas <phalouvas@kainotomo.com>
      *
      * @param Request $request
+     * @param Smsto\Hubspot\Models\Settings $settings
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
      */
-    public function call(SmstoRequest $request)
+    public function call(SmstoRequest $request, Settings $settings)
     {
-        $settings = Settings::first();
         $validated = $request->validate($request->rules());
         $method = strtolower($validated['_method']);
         $url = $validated['_url'];
-        $payload = isset($validated['payload']) ? $validated['payload'] : null;
+        $payload = isset($validated['payload']) ? json_decode($validated['payload'], true) : null;
         $response = Http::withToken($settings->api_key)->asJson()->acceptJson()->$method($url, $payload);
         return response(json_decode($response, true));
     }

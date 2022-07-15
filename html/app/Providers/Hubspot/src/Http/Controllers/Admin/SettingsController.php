@@ -2,18 +2,27 @@
 
 namespace Smsto\Hubspot\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Smsto\Hubspot\Models\Settings;
 
 class SettingsController extends AdminController
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('hubspot::settings.index', ['settings' => Settings::paginate()]);
+        $query = Settings::select('*');
+        if ($request->search) {
+            $query->where('hub_id', $request->search)
+            ->orWhere('user_id', $request->search)
+            ->orWhere('smsto_user', 'LIKE', '%' . $request->search . '%');
+        }
+        $settings = $query->paginate();
+
+        return view('hubspot::settings.index', ['settings' => $settings]);
     }
 
     /**

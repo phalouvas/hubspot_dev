@@ -49,7 +49,8 @@ class Settings extends Model
         'api_key',
         'sender_id',
         'show_reports',
-        'show_people'
+        'show_people',
+        'smsto_user'
     ];
 
     /**
@@ -68,6 +69,7 @@ class Settings extends Model
         'scope_to_scope_group_pks' => 'array',
         'trial_scopes' => 'array',
         'trial_scope_to_scope_group_pks' => 'array',
+        'smsto_user' => 'array',
     ];
 
     /**

@@ -1,4 +1,4 @@
-<x-hub-layout title="Settings Create">
+<x-hub-form title="Settings Create">
     <form action="{{route('hubspot.web.settings.store')}}" method="POST">
         @csrf
 
@@ -34,7 +34,43 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-3">
+            <label for="show_reports" class="form-label">Show Reports</label>
+            <div class="mb-3 btn-group" role="group" aria-label="Show Reports Group">
+                <input type="radio" class="btn-check" id="show_reports_true" name="show_reports" autocomplete="off"
+                    aria-describedby="show_reportsHelp" class="@error('show_reports') is-invalid @enderror" checked value="1" >
+                <label for="show_reports_true" class="btn btn-outline-success">Yes</label>
+                <input type="radio" class="btn-check" id="show_reports_false" name="show_reports" autocomplete="off"
+                    aria-describedby="show_reportsHelp" class="@error('show_reports') is-invalid @enderror" value="0">
+                <label for="show_reports_false" class="btn btn-outline-danger">No</label>
+            </div>
+            <div id="show_reportsHelp" class="form-text">
+                Whether to show all messages log, or not.
+            </div>
+            @error('show_reports')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="show_people" class="form-label">Show People</label>
+            <div class="mb-3 btn-group" role="group" aria-label="Show People Group">
+                <input type="radio" class="btn-check" id="show_people_true" name="show_people" autocomplete="off"
+                    aria-describedby="show_peopleHelp" class="@error('show_people') is-invalid @enderror" checked value="1" >
+                <label for="show_people_true" class="btn btn-outline-success">Yes</label>
+                <input type="radio" class="btn-check" id="show_people_false" name="show_people" autocomplete="off"
+                    aria-describedby="show_peopleHelp" class="@error('show_people') is-invalid @enderror" value="0">
+                <label for="show_people_false" class="btn btn-outline-danger">No</label>
+            </div>
+            <div id="show_peopleHelp" class="form-text">
+                Whether to people, or not.
+            </div>
+            @error('show_people')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
 
     </form>
-</x-hub-layout>
+</x-hub-form>

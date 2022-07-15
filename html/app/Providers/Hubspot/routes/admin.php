@@ -15,7 +15,7 @@ Route::group(['prefix' => 'hubspot/admin', 'middleware' => ['web', config('hubsp
     });
 
     Route::prefix('/settings')->group(function () {
-        Route::get('/', [\Smsto\Hubspot\Http\Controllers\Admin\SettingsController::class, 'index'])->name('hubspot.admin.settings.index');
+        Route::any('/', [\Smsto\Hubspot\Http\Controllers\Admin\SettingsController::class, 'index'])->name('hubspot.admin.settings.index');
         Route::get('/show/{settings}', [\Smsto\Hubspot\Http\Controllers\Admin\SettingsController::class, 'show'])->name('hubspot.admin.settings.show');
         Route::post('/destroy/{settings}', [\Smsto\Hubspot\Http\Controllers\Admin\SettingsController::class, 'destroy'])->name('hubspot.admin.settings.destroy');
     });

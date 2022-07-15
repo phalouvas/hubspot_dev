@@ -7,6 +7,7 @@ use Smsto\Hubspot\Http\Requests\Web\StoreSettingsRequest;
 use Smsto\Hubspot\Http\Requests\Web\UpdateSettingsRequest;
 use Smsto\Hubspot\Models\Settings;
 use HubSpot\Factory;
+use Illuminate\Support\Facades\Http;
 
 class SettingsController extends WebController
 {
@@ -30,8 +31,10 @@ class SettingsController extends WebController
     public function store(StoreSettingsRequest $request)
     {
         $validated = $request->validate($request->rules());
-        $validated['show_reports'] = isset($validated['show_reports']) ? true : false;
-        $validated['show_people'] = isset($validated['show_people']) ? true : false;
+
+        $user = Http::withToken($validated['api_key'])->asJson()->acceptJson()->get('https://sms.to/api/v1/authenticated_user');
+        $user = json_decode($user, true);
+        $validated['smsto_user'] = $user['user'];
 
         $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
             'authorization_code',
@@ -54,11 +57,12 @@ class SettingsController extends WebController
         $validated['scope_to_scope_group_pks'] = $api_response->getScopeToScopeGroupPks();
         $validated['trial_scopes'] = $api_response->getTrialScopes();
         $validated['trial_scope_to_scope_group_pks'] = $api_response->getTrialScopeToScopeGroupPks();
-        $validated['hub_id'] = $api_response->getHubId();
-        $validated['app_id'] = $api_response->getAppId();
-        $validated['user_id'] = $api_response->getUserId();
 
-        $settings = Settings::create($validated);
+        $settings = Settings::updateOrCreate([
+            'hub_id' => $api_response->getHubId(),
+            'app_id' => $api_response->getAppId(),
+            'user_id' => $api_response->getUserId(),
+        ] ,$validated);
         return redirect(route('hubspot.web.settings.completed', ['settings' => $settings->id]));
     }
 

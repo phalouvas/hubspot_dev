@@ -69,49 +69,18 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto HubSpot Integration</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="w-100"></div>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                @auth
-                <a class="nav-link px-3" href="{{ route('hubspot.web.home') }}">Home</a>
-                @endauth
-                @guest
-                <a class="nav-link px-3" href="{{ route('hubspot.admin.actions.index') }}">Admin</a>
-                @endguest
-            </div>
-        </div>
+        @auth
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ route('hubspot.admin.actions.index') }}">SMSto
+            HubSpot Integration</a>
+        @endauth
+        @guest
+        <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">SMSto HubSpot Integration</div>
+        @endguest
     </header>
 
     <div class="container-fluid">
         <div class="row">
-            @auth
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.actions.index' ? 'active' : '' !!}" aria-current="page" href="{{ route('hubspot.admin.actions.index') }}">
-                                <span data-feather="hash" class="align-text-bottom"></span>
-                                Actions
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {!! request()->route()->getName() == 'hubspot.admin.settings.index' ? 'active' : '' !!}" href="{{ route('hubspot.admin.settings.index') }}">
-                                <span data-feather="users" class="align-text-bottom"></span>
-                                Users
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            @endauth
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
                 <h2>{{ $title ?? 'SMSto HubSpot Integration' }}</h2>
                 @if(session()->has('message'))
                 <div class="alert alert-success">

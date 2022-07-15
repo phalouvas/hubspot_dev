@@ -3,9 +3,8 @@
 namespace Smsto\Hubspot\Http\Requests\Web;
 
 use Smsto\Hubspot\Http\Requests\FormRequest;
-use Smsto\Hubspot\Rules\ApiKey;
 
-class StoreSettingsRequest extends FormRequest
+class SendCardsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,9 @@ class StoreSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', 'string'],
-            'api_key' => ['required', 'string', new ApiKey],
-            'sender_id' => ['string', 'max:9', 'nullable'],
-            'show_reports' => ['boolean', 'required'],
-            'show_people' => ['boolean', 'required'],
+            'to' => ['nullable', 'string'],
+            'sender_id' => ['nullable', 'string'],
+            'active_tab' => ['nullable', 'string']
         ];
     }
 }

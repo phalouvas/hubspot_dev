@@ -27,8 +27,8 @@ class UpdateSettingsRequest extends FormRequest
         return [
             'api_key' => ['required', 'string', new ApiKey],
             'sender_id' => ['required', 'string', 'max:9'],
-            'show_reports' => ['string', 'nullable'],
-            'show_people' => ['string', 'nullable'],
+            'show_reports' => ['boolean', 'required'],
+            'show_people' => ['boolean', 'required'],
         ];
     }
 }

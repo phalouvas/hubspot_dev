@@ -3,6 +3,13 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
+                    <td colspan="4">
+                        <div class="btn-group" role="group">
+                            <a href="{{route('hubspot.admin.actions.create')}}" class="btn btn-outline-primary" title="Create"><span data-feather="plus" class="align-text-bottom"></span></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <th>id</th>
                     <th>actionName</th>
                     <th>actionUrl</th>
@@ -26,15 +33,6 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4">
-                        <div class="btn-group" role="group">
-                            <a href="{{route('hubspot.admin.actions.create')}}" class="btn btn-success">Create</a>
-                        </div>
-                    </td>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </x-hub-layout>

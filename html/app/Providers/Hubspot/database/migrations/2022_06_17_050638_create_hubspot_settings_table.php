@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('sender_id', 9)->nullable();
             $table->boolean('show_reports')->default(true);
             $table->boolean('show_people')->default(true);
+            $table->json('smsto_user');
 
             $table->timestamps();
         });

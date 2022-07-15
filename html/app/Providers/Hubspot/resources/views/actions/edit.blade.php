@@ -1,4 +1,4 @@
-<x-hub-layout title="Edit Action">
+<x-hub-form title="Edit Action">
     <p>Revision id: {{$revisionId}}</p>
     <form method="POST" action="{{route('hubspot.admin.actions.update', ['action_id' => $id])}}">
         @csrf
@@ -16,11 +16,16 @@
             </select>
             <div id="publishedHelp" class="form-text">Whether this custom action is published to customers.</div>
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#archiveModal">
-            Archive
-        </button>
-        <a href="{{route('hubspot.admin.actions.index')}}" class="btn btn-secondary">Close</a>
+        <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-outline-primary" title="Save"><span data-feather="save"
+                    class="align-text-bottom"></button>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#archiveModal"
+                title="Archive">
+                <span data-feather="trash" class="align-text-bottom">
+            </button>
+            <button type="button" class="btn btn-outline-secondary text-right" href="#" onclick="history.back()"
+                title="Close"><span data-feather="x" class="align-text-bottom"></span></button>
+        </div>
     </form>
 
     <!-- Archive Modal -->
@@ -36,12 +41,16 @@
                     future executions will be marked as a failure.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{route('hubspot.admin.actions.archive', ['action_id' => $id])}}"
-                        class="btn btn-danger">Submit</a>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" title="Close"><span
+                                data-feather="x" class="align-text-bottom"></a></button>
+                        <a href="{{route('hubspot.admin.actions.archive', ['action_id' => $id])}}"
+                            class="btn btn-outline-danger" title="Submit"><span data-feather="trash"
+                                class="align-text-bottom"></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-</x-hub-layout>
+</x-hub-form>

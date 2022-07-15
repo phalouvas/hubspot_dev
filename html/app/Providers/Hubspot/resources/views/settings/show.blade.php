@@ -1,9 +1,12 @@
-<x-hub-layout title="User Details">
+<x-hub-form title="User Details">
     <table class="table">
         <tbody>
             <tr>
                 <th>ID</th>
                 <td>{{$settings->id}}</td>
+            </tr>
+            <tr class="table-info">
+                <th colspan="2">HubsSpot User</th>
             </tr>
             <tr>
                 <th>User</th>
@@ -25,9 +28,12 @@
                 <th>User ID</th>
                 <td>{{$settings->user_id}}</td>
             </tr>
+            <tr class="table-info">
+                <th colspan="2">Application settings</th>
+            </tr>
             <tr>
                 <th>API Key</th>
-                <td></td>
+                <td>***********************************</td>
             </tr>
             <tr>
                 <th>Sender ID</th>
@@ -53,16 +59,27 @@
                     @endif
                 </td>
             </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <a href="{{route('hubspot.web.settings.edit')}}?appId={{$settings->app_id}}&portalId={{$settings->hub_id}}&userId={{$settings->user_id}}" class="btn btn-success" title="Edit"><span data-feather="edit" class="align-text-bottom"></span></a>
-                        <a href="{{route('hubspot.admin.settings.index')}}" class="btn btn-secondary" title="Close"><span data-feather="x" class="align-text-bottom"></span></a>
-                    </div>
-                </td>
+            <tr class="table-info">
+                <th colspan="2">SMSto User</th>
             </tr>
-        </tfoot>
+            <tr>
+                <th>id</th>
+                <td>{{$settings->smsto_user['id']}}</td>
+            </tr>
+            <tr>
+                <th>_id</th>
+                <td>{{$settings->smsto_user['_id']}}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{$settings->smsto_user['name']}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{$settings->smsto_user['email']}}</td>
+            </tr>
+        </tbody>
     </table>
-</x-hub-layout>
+    <button type="button" class="btn btn-outline-secondary text-right" href="#" onclick="history.back()"
+                title="Close"><span data-feather="x" class="align-text-bottom"></span></button>
+</x-hub-form>

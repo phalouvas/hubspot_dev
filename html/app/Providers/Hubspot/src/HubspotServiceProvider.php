@@ -70,6 +70,7 @@ class HubspotServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
             $this->registerComponent('layout');
+            $this->registerComponent('form');
         });
     }
 
@@ -93,6 +94,9 @@ class HubspotServiceProvider extends ServiceProvider
      */
     protected function install()
     {
+        /**
+         * Add config files
+         */
         File::copy(__DIR__ . '/../stubs/config/hubspot.php', config_path('hubspot.php'));
         File::copy(__DIR__ . '/../stubs/config/hubspot_connection.php', config_path('hubspot_connection.php'));
 
@@ -119,6 +123,14 @@ class HubspotServiceProvider extends ServiceProvider
 
         file_put_contents(config_path('hubspot_connection.php'), str_replace($search, $replace, file_get_contents(config_path('hubspot_connection.php'))));
         config()->set('database.connections.hubspot', $default_connection);
+
+        /**
+         * Add middleware
+         */
+        $search = 'protected $routeMiddleware = [';
+        $replace = 'protected $routeMiddleware = [
+        \'hubspot\' => \Smsto\Hubspot\Http\Middleware\ValidateHubspotRequest::class,';
+        file_put_contents(app_path('Http/Kernel.php'), str_replace($search, $replace, file_get_contents(app_path('Http/Kernel.php'))));
     }
 
 }

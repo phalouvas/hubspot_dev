@@ -1,11 +1,11 @@
 <?php
 
-namespace Smsto\Hubspot\Http\Requests\Web;
+namespace Smsto\Hubspot\Http\Requests\Api;
 
+use Illuminate\Validation\Rule;
 use Smsto\Hubspot\Http\Requests\FormRequest;
-use Smsto\Hubspot\Rules\ApiKey;
 
-class StoreSettingsRequest extends FormRequest
+class IndexCardsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,11 @@ class StoreSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required', 'string'],
-            'api_key' => ['required', 'string', new ApiKey],
-            'sender_id' => ['string', 'max:9', 'nullable'],
-            'show_reports' => ['boolean', 'required'],
-            'show_people' => ['boolean', 'required'],
+            'associatedObjectType' => ['required', 'string', Rule::in(['CONTACT'])],
+            'portalId' => ['required', 'integer'],
+            'userId' => ['required', 'integer'],
+            'associatedObjectId' => ['required', 'integer'],
+            'phone' => ['required', 'string'],
         ];
     }
 }
