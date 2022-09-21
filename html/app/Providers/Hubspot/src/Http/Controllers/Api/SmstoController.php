@@ -48,7 +48,7 @@ class SmstoController extends AdminController
         $method = strtolower($validated['_method']);
         $url = $validated['_url'];
         $payload = isset($validated['payload']) ? json_decode($validated['payload'], true) : null;
-        $response = Http::withToken($settings->api_key)->asJson()->acceptJson()->$method($url, $payload);
+        $response = Http::withHeaders(['X-Smsto-Integration-Name' => 'hubspot'])->withToken($settings->api_key)->asJson()->acceptJson()->$method($url, $payload);
         return response(json_decode($response, true));
     }
 
@@ -72,7 +72,7 @@ class SmstoController extends AdminController
         $validated['inputFields']['sender_id'] = isset($validated['inputFields']['sender_id']) ? $validated['inputFields']['sender_id'] : $settings->sender_id;
 
         $api_key = $settings->api_key;
-        $response = Http::withToken($api_key)->asJson()->acceptJson()->post('https://api.sms.to/sms/send', $validated['inputFields']);
+        $response = Http::withHeaders(['X-Smsto-Integration-Name' => 'hubspot'])->withToken($api_key)->asJson()->acceptJson()->post('https://api.sms.to/sms/send', $validated['inputFields']);
         $response = json_decode($response, true);
         if ($response['success']) {
             $settings->createTimelineEvent($validated, 'SUCCESS');

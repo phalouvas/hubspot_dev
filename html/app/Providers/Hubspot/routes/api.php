@@ -19,4 +19,6 @@ Route::group(['prefix' => 'hubspot/api', 'middleware' => 'api', 'hubspot'], func
         Route::get('/', [\Smsto\Hubspot\Http\Controllers\Api\CardsController::class, 'index'])->name('hubspot.api.cards.index');
     });
 
+    Route::any('/webhooks', [\Smsto\Hubspot\Http\Controllers\Api\WebhooksController::class, 'index'])->name('hubspot.api.webhooks.index');
+
 });
