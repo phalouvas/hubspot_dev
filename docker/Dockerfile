@@ -7,6 +7,8 @@ RUN apk update && apk add --update nodejs npm \
   composer php-pdo_sqlite php-pdo_mysql php-pdo_pgsql php-simplexml php-fileinfo php-dom php-tokenizer php-xml php-xmlwriter php-session \
   openrc bash nginx
 
+RUN apk add git
+
 RUN docker-php-ext-install pdo pdo_mysql
 
 #COPY --chown=www-data:www-data web /app
