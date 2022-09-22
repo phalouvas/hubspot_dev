@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fc5d2a1ce484d51319e8addfbb776eb",
+    "content-hash": "b4557ea6864e3403745f7eaf9da289b3",
     "packages": [
         {
             "name": "brick/math",
@@ -952,6 +952,62 @@
                 "source": "https://github.com/HubSpot/hubspot-api-php/tree/8.2.1"
             },
             "time": "2022-06-10T13:31:22+00:00"
+        },
+        {
+            "name": "intergo/hubspot",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:intergo/pkg-hubspot.git",
+                "reference": "3efc6defe98150f6c782077faf3b22a6bd60b169"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://pkg.registry.intergotelecom.com/dist/intergo/hubspot/intergo-hubspot-3efc6defe98150f6c782077faf3b22a6bd60b169-zip-6e1d03.zip",
+                "reference": "3efc6defe98150f6c782077faf3b22a6bd60b169"
+            },
+            "require": {
+                "hubspot/api-client": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Smsto\\Hubspot\\HubspotServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Smsto\\Hubspot\\": "src/"
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "@php artisan hubspot:install",
+                    "@php artisan hubspot:update",
+                    "@php artisan migrate"
+                ],
+                "post-update-cmd": [
+                    "@php artisan hubspot:update",
+                    "@php artisan migrate"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Intergo Telecom Ltd",
+                    "email": "support@sms.to"
+                }
+            ],
+            "description": "SMSto HubSpot integration Laravel package",
+            "support": {
+                "source": "https://github.com/intergo/pkg-hubspot/tree/1.2.0",
+                "issues": "https://github.com/intergo/pkg-hubspot/issues"
+            },
+            "time": "2022-09-08T07:36:02+00:00"
         },
         {
             "name": "laravel/framework",
