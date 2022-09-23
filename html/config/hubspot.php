@@ -61,9 +61,9 @@ return [
                             "sender_id": "Sender ID"
                         },
                         "inputFieldDescriptions": {
-                            "to": "Choose the mobile phone of the contact/lead",
+                            "to": "Choose the mobile phone of the contact.",
                             "message": "Insert here the message to send.",
-                            "sender_id": "The displayed value of who sent the message"
+                            "sender_id": "The displayed value of who sent the message. Max characters 9."
                         }
                     }
                 },
