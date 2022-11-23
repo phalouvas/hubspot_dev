@@ -25,5 +25,5 @@ services:
 
 networks:
     default:
-        name: ${COMPOSE_PROJECT_NAME}-local-net
-        driver: bridge
+        external:
+            name: intergo_smsto-local-net
