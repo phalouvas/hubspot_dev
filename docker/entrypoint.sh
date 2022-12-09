@@ -15,5 +15,5 @@ openrc
 touch /run/openrc/softlevel
 rc-service nginx start
 
-echo "Starting PHP server..."
-php-fpm
+echo "Starting SuperVisor..."
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

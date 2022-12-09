@@ -5,7 +5,7 @@ ENV PORT=${PORT}
 
 RUN apk update && apk add --update nodejs npm \
   composer php-pdo_sqlite php-pdo_mysql php-pdo_pgsql php-simplexml php-fileinfo php-dom php-tokenizer php-xml php-xmlwriter php-session \
-  openrc bash nginx git
+  openrc bash nginx git supervisor
 
 RUN docker-php-ext-install pdo pdo_mysql
 
@@ -29,3 +29,6 @@ EXPOSE 8085
 
 COPY entrypoint.sh /docker/entrypoint.sh
 ENTRYPOINT [ "/docker/entrypoint.sh" ]
+
+COPY ./supervisord.conf /etc/supervisor/conf.d/
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
