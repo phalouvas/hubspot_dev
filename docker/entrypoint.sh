@@ -7,6 +7,9 @@ sed -i "s/listen PORT/listen $PORT/g" /etc/nginx/nginx.conf
 cd /app
 chown -R www-data:www-data ../app
 
+echo "Starting cron"
+crond
+
 echo "Starting nginx server..."
 openrc
 touch /run/openrc/softlevel
