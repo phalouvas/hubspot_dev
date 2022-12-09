@@ -5,11 +5,16 @@ ENV PORT=${PORT}
 
 RUN apk update && apk add --update nodejs npm \
   composer php-pdo_sqlite php-pdo_mysql php-pdo_pgsql php-simplexml php-fileinfo php-dom php-tokenizer php-xml php-xmlwriter php-session \
-  openrc bash nginx
-
-RUN apk add git
+  openrc bash nginx git
 
 RUN docker-php-ext-install pdo pdo_mysql
+
+# Install redis
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
+  && pecl install redis \
+  && docker-php-ext-enable redis \
+  && apk del pcre-dev ${PHPIZE_DEPS} \
+  && rm -rf /tmp/pear
 
 #COPY --chown=www-data:www-data web /app
 WORKDIR /app
